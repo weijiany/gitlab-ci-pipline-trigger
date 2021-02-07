@@ -1,0 +1,10 @@
+{
+  "name": "gitlab-ci-pipline-run",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "weijian <weijian.yang@thoughtworks.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
