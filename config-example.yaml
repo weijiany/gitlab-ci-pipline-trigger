@@ -1,0 +1,9 @@
+url: https://gitlab.com/api/v4
+token: [gitlab access token]
+group_name: group name
+branch: branch name
+stage: stage name
+projects:
+  - need to trigger project
+  - project1
+  - project2
