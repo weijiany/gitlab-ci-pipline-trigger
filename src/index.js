@@ -37,14 +37,14 @@ const main = async () => {
         let pipelineId = idOfFirst(await getPipelineOfProject(projectId, branch))
         console.log(`pipeline id: ${pipelineId}`)
         if (pipelineId === undefined){
-            console.log(`***the project does not have any pipeline`)
+            console.log(`*** the [project: ${project['name']}] on [branch: ${branch}] does not have any pipeline`)
             continue;
         }
 
         let job = first(filterJobByStage(await getJobsOfPipeline(projectId, pipelineId)));
         console.log(`job id: ${(id(job))}`)
         await triggerJob(projectId, job);
-        console.log(`end process project: ${project['name']}, branch: ${branch}`)
+        console.log(`end process [project: ${project['name']}], [branch: ${branch}], [stage: ${stage}]`)
     }
 }
 
