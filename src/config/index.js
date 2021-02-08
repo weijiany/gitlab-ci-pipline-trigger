@@ -7,6 +7,7 @@ const file = fs.readFileSync(`${rootPath}/config.yml`, 'utf8');
 const config = yaml.parse(file);
 
 module.exports = {
+    url:          config["url"],
     token:        config["token"],
     groupName:    config["group_name"],
     branch:       config["branch"],

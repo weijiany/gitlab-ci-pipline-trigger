@@ -1,8 +1,8 @@
 const axios = require('axios');
 
-const { token } = require('../config');
+const { token, url } = require('../config');
 
-axios.defaults.baseURL = 'https://gitlab.com/api/v4';
+axios.defaults.baseURL = url;
 axios.defaults.headers.common['PRIVATE-TOKEN'] = token;
 
 const tryWrapper = async (func) => {
