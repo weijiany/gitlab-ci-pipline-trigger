@@ -30,21 +30,25 @@ const main = async () => {
     let projects = await recursionGetGroup(groupId);
 
     for (const project of projects) {
-        console.log('-----------------------------')
-        console.log(`start process [project: ${project['name']}], [branch: ${branch}], [stage: ${stage}]`)
-        let projectId = project['id'];
-        console.log(`project id: ${projectId}`)
-        let pipelineId = idOfFirst(await getPipelineOfProject(projectId, branch))
-        console.log(`pipeline id: ${pipelineId}`)
-        if (pipelineId === undefined){
-            console.log(`*** the [project: ${project['name']}] on [branch: ${branch}] does not have any pipeline`)
-            continue;
-        }
+        try {
+            console.log('-----------------------------')
+            console.log(`start process [project: ${project['name']}], [branch: ${branch}], [stage: ${stage}]`)
+            let projectId = project['id'];
+            console.log(`project id: ${projectId}`)
+            let pipelineId = idOfFirst(await getPipelineOfProject(projectId, branch))
+            console.log(`pipeline id: ${pipelineId}`)
+            if (pipelineId === undefined) {
+                console.log(`*** the [project: ${project['name']}] on [branch: ${branch}] does not have any pipeline`)
+                continue;
+            }
 
-        let job = first(filterJobByStage(await getJobsOfPipeline(projectId, pipelineId)));
-        console.log(`job id: ${(id(job))}`)
-        await triggerJob(projectId, job);
-        console.log(`end process [project: ${project['name']}], [branch: ${branch}], [stage: ${stage}]`)
+            let job = first(filterJobByStage(await getJobsOfPipeline(projectId, pipelineId)));
+            console.log(`job id: ${(id(job))}`)
+            await triggerJob(projectId, job);
+            console.log(`end process [project: ${project['name']}], [branch: ${branch}], [stage: ${stage}]`)
+        } catch (e) {
+            console.error(`============ fail process [project: ${project['name']}], [branch: ${branch}], [stage: ${stage}], error: ${e}`);
+        }
     }
 }
 
